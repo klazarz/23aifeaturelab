@@ -6,39 +6,41 @@ source $(pwd)/.env
 
 ## load variables (scripts, passwords, etc)
 
-## create the compose script folder and files
-mkdir -p $(pwd)/composescript/envvar
-chmod 777 $(pwd)/composescript/envvar/
+rm -rf $(pwd)/envvar
 
-mkdir -p $(pwd)/composescript/ords_config
-chmod 777 $(pwd)/composescript/ords_config
+## create the compose script folder and files
+mkdir -p $(pwd)/envvar
+chmod 777 $(pwd)/envvar/
+
+mkdir -p $(pwd)/ords_config
+chmod 777 $(pwd)/ords_config
 
 export vncpwd="$vncpwdlocal"
-echo $vncpwd | tee $(pwd)/composescript/envvar/.vncpwd > /dev/null
-echo vncpwd=$(cat $(pwd)/composescript/envvar/.vncpwd) > $(pwd)/composescript/envvar/.vncpwd.env
+echo $vncpwd | tee $(pwd)/envvar/.vncpwd > /dev/null
+echo vncpwd=$(cat $(pwd)/envvar/.vncpwd) > $(pwd)/envvar/.vncpwd.env
 
-echo "USERNAME=admin" >> $(pwd)/composescript/envvar/.env
-echo "DBPASSWORD=${dbpassword}" >> $(pwd)/composescript/envvar/.env
-echo "ORACLE_PWD=${dbpassword}" >> $(pwd)/composescript/envvar/.env
-echo "DBCONNECTION=${dbconnectionlocal}" >> $(pwd)/composescript/envvar/.env
-echo "PUBLIC_IP=${public_ip}" >> $(pwd)/composescript/envvar/.env
-echo "dbname=${dbnamelocal}" >> $(pwd)/composescript/envvar/.env
-echo "ORDSURL=${ordsurllocal}" >> $(pwd)/composescript/envvar/.env
-echo "SERVICE_NAME=${dbname}" >> $(pwd)/composescript/envvar/.env
+echo "USERNAME=admin" >> $(pwd)/envvar/.env
+echo "DBPASSWORD=${dbpassword}" >> $(pwd)/envvar/.env
+echo "ORACLE_PWD=${dbpassword}" >> $(pwd)/envvar/.env
+echo "DBCONNECTION=${dbconnectionlocal}" >> $(pwd)/envvar/.env
+echo "PUBLIC_IP=${public_ip}" >> $(pwd)/envvar/.env
+echo "dbname=${dbnamelocal}" >> $(pwd)/envvar/.env
+echo "ORDSURL=${ordsurllocal}" >> $(pwd)/envvar/.env
+echo "SERVICE_NAME=${dbname}" >> $(pwd)/envvar/.env
 
 
-cp $(pwd)/composescript/envvar/.env $(pwd)/composescript/app/simidemo/.
-cp $(pwd)/composescript/envvar/.env $(pwd)/composescript/lab/simidemo/.
+cp $(pwd)/envvar/.env $(pwd)/app/simidemo/.
+cp $(pwd)/envvar/.env $(pwd)/lab/simidemo/.
 
-cp $(pwd)/composescript/envvar/.env $(pwd)/composescript/app/demoapp/.
-cp $(pwd)/composescript/envvar/.env $(pwd)/composescript/lab/demoapp/.
+cp $(pwd)/envvar/.env $(pwd)/app/demoapp/.
+cp $(pwd)/envvar/.env $(pwd)/lab/demoapp/.
 
-mkdir -p $(pwd)/composescript/envvar/.jupyter
+mkdir -p $(pwd)/envvar/.jupyter
 
-cp -r $(pwd)/composescript/jl_config/* $(pwd)/composescript/envvar/.jupyter/.
+cp -r $(pwd)/jl_config/* $(pwd)/envvar/.jupyter/.
 
-mkdir -p $(pwd)/composescript/envvar/.local/share/code-server/User/
-cp -r $(pwd)/composescript/vscode-config/* $(pwd)/composescript/envvar/.local/share/code-server/User/. 
+mkdir -p $(pwd)/envvar/.local/share/code-server/User/
+cp -r $(pwd)/vscode-config/* $(pwd)/envvar/.local/share/code-server/User/. 
 
 
 podman compose up

@@ -11,7 +11,7 @@ RUN dnf update -y && \
     dnf module enable nodejs:20 -y && \
     dnf -y install oracle-epel-release-el9 git nodejs wget curl python3.11 python3.11-requests python3.11-pip python3.11-setuptools python3.11-wheel \
     libffi-devel openssl openssl-devel tk-devel sudo xz-devel zlib-devel bzip2-devel readline-devel libuuid-devel ncurses-devel \
-    libaio oracle-database-preinstall-23ai java-21-openjdk maven jq bzip2 && \
+    libaio oracle-database-preinstall-23ai java-21-openjdk jq bzip2 && \
     dnf clean all && \
     alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1 && \
     alternatives --set python3 /usr/bin/python3.11 && \
